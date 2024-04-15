@@ -1,7 +1,7 @@
 ---
 title: "Cultura Data-Driven: Oportunidade, Desafios e Iniciativas" # -----> Título
 subtitle: "" # -----> Subtítulo
-author: "Maurício Rodrigues" # -----> Autoria
+author: "Guilherme César, Kauê José, Maurício Rodrigues, Pedro Vinicius" # -----> Autoria
 date: "2024-04-17" # -----> Data de publicação
 date-format: short # -----> Formato de data curto: dd/mm/aaaa
 lang: pt # -----> Linguagem: português
@@ -28,7 +28,7 @@ A soma de todos os lados de um dado padrão é 21
 data("mtcars")
 library(ggplot2)
 library(explore)
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 ```
 
 INTRODUÇÃO
