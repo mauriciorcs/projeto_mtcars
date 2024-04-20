@@ -8,7 +8,7 @@
 
 <meta name="author" content="Maurício Rodrigues">
 
-<title>Cultura Data-Driven: Oportunidade, Desafios e Iniciativas</title>
+<title>Estudo da Base mtcars</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -79,8 +79,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Cultura Data-Driven: Oportunidade, Desafios e Iniciativas</h1>
-            <p class="subtitle lead">Projeto de Banco de Dados</p>
+      <h1 class="title">Estudo da Base mtcars</h1>
+            <p class="subtitle lead"></p><p>Referências: - <a href="https://cran.r-project.org/web/packages/explore/vignettes/explore_mtcars.html">Explore mtcars</a> - <a href="http://leg.ufpr.br/~paulojus/ce223/ce223/ce223se8.html">CE223 - Modelos de Regressão Linear</a> - <a href="https://rpubs.com/Saulo_Gil/817833">Análise do dataset mtcars em R</a></p><p></p>
                       </div>
   </div>
     
@@ -114,13 +114,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="dados.jpg" class="img-fluid" style="width:100.0%"></p>
+<p><img src="logo.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-<p>A soma de todos os lados de um dado padrão é 21</p>
-<p>INTRODUÇÃO</p>
+<section id="introdução" class="level3">
+<h3 class="anchored" data-anchor-id="introdução">INTRODUÇÃO</h3>
 <p>A base de dados r mtcars consiste de uma planilha disponível no base r cujo os dados foram extraídos da revista Motor Trend US magazine de 1974. Os dados inseridos consistem do consumo de combustível, 10 características físicas e/ou performance de 32 automóveis (modelos de 1973-1974). A planilha do r mtcars consiste em 32 obsevações (modelo do carro) com 11 variáveis numéricas.</p>
-<p>mpg = Milhas por galão (do inglês Miles/(US) gallon); cyl = Número de cilindos (do inglês Number of cylinders); disp = Deslocamento do motor (cu.in.)(do inglês Displacement); hp = Cavalos de potência (do inglês Gross horsepower); drat = Razão do eixo traseiro (do inglês Rear axle ratio); wt = Peso (1000 lbs)(do inglês Weight); qsec = Tempo para percorrer 1/4 de uma milha (do inglês 1/4 mile time); vs = Motor (0 = V-shaped, 1 = straight)(do ingês Engine); am = Transmissão (0 = automatic, 1 = manual)(do inglês Transmission); gear = Número de eixos dianteiros (do inglês Number of forward gears); carb = Número de carburadores (do inglês Number of carburetors).</p>
+<p>mpg = Milhas por galão (do inglês Miles/(US) gallon);</p>
+<p>cyl = Número de cilindos (do inglês Number of cylinders);</p>
+<p>disp = Deslocamento do motor (cu.in.)(do inglês Displacement);</p>
+<p>hp = Cavalos de potência (do inglês Gross horsepower);</p>
+<p>drat = Razão do eixo traseiro (do inglês Rear axle ratio);</p>
+<p>wt = Peso (1000 lbs)(do inglês Weight);</p>
+<p>qsec = Tempo para percorrer 1/4 de uma milha (do inglês 1/4 mile time);</p>
+<p>vs = Motor (0 = V-shaped, 1 = straight)(do ingês Engine);</p>
+<p>am = Transmissão (0 = automatic, 1 = manual)(do inglês Transmission);</p>
+<p>gear = Número de eixos dianteiros (do inglês Number of forward gears);</p>
+<p>carb = Número de carburadores (do inglês Number of carburetors).</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
@@ -139,54 +149,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(wt,mpg)) <span class="sc">+</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Peso"</span>,        </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Milhas por galão"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Milhas por galão x Peso"</span>)<span class="sc">+</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>hp)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="404_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Este gráfico de dispersão apresenta a relação (correlação negativa) entre o peso de um carro e sua eficiência de combustível, medida em milhas por galão (mpg). Cada ponto no gráfico representa um carro, onde o eixo horizontal representa o peso do carro e o eixo vertical representa o número de milhas que o carro pode percorrer com um galão de combustível. Observando a dispersão dos pontos, podemos visualizar como o peso de um carro pode afetar sua eficiência de combustível. Essa visualização pode ajudar a identificar tendências ou padrões na relação entre o peso e a eficiência de combustível dos carros.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">y =</span> mpg)) <span class="sc">+</span>  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Número de cilindros"</span>,                </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Consumo de combustível (mpg)"</span>,       </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Distribuição do consumo de combustível por número de cilindros"</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(wt,mpg)) <span class="sc">+</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Peso"</span>,        </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Milhas por galão"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Milhas por galão x Peso"</span>)<span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="404_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>apesar da maioria dos carros com 8 cilindros terem um consumo de combustível semelhante, há alguns casos extremos com um consumo muito alto ou muito baixo em relação à média. Esses pontos discrepantes podem ser de interesse para uma análise mais aprofundada, pois podem indicar características incomuns nos veículos com 8 cilindros que os diferenciam dos demais.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">explain_tree</span>(<span class="at">target =</span> hp, <span class="at">minsplit=</span><span class="dv">15</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(cyl,mpg)) <span class="sc">+</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cilindros"</span>,        </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Milhas por galão"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Milhas por galão x Cilindros"</span>)<span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="404_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Existe uma relação entre potência e outras variáveis como número de cilindros?</p>
-<p>Todos os carros têm uma potência média de 147 (mostrada no nó superior). Em seguida, os dados são divididos por cilindro. Carros com cilindragem &lt;7 (56% de todos os carros) têm uma potência média de 98 e carros com cilindragem &gt;=7 (44% de todos os carros) têm uma potência média de 209.</p>
-<p>As variáveis cilindragem (cyl) e consumo de combustível (mpg) podem explicar a potência. Os nós inferiores estão mostrando uma potência média de 80, 121 e 209.</p>
-<p>No diagrama, são mostrados valores arredondados.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> hp, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gráfico de Dispersão: Potência vs. Consumo de Combustível"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Milhas por Galão (mpg)"</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Potência (hp)"</span>,</span>
@@ -200,75 +204,344 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="404_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Este gráfico de dispersão apresenta a relação (correlação negativa) entre o peso de um carro e sua eficiência de combustível, medida em milhas por galão (mpg). Cada ponto no gráfico representa um carro, onde o eixo horizontal representa o peso do carro e o eixo vertical representa o número de milhas que o carro pode percorrer com um galão de combustível. Observando a dispersão dos pontos, podemos visualizar como o peso de um carro pode afetar sua eficiência de combustível. Essa visualização pode ajudar a identificar tendências ou padrões na relação entre o peso e a eficiência de combustível dos carros.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustando o modelo de regressão: O ~ separa a variável dependente (à esquerda) das variáveis independentes (à direita).</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(hp <span class="sc">~</span> cyl <span class="sc">+</span> mpg, <span class="at">data =</span> mtcars)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">y =</span> mpg)) <span class="sc">+</span>  </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Número de cilindros"</span>,                </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Consumo de combustível (mpg)"</span>,       </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Distribuição do consumo de combustível por número de cilindros"</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Apesar da maioria dos carros com 8 cilindros terem um consumo de combustível semelhante, há alguns casos extremos com um consumo muito alto ou muito baixo em relação à média. Esses pontos discrepantes podem ser de interesse para uma análise mais aprofundada, pois podem indicar características incomuns nos veículos com 8 cilindros que os diferenciam dos demais.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">explain_tree</span>(<span class="at">target =</span> hp, <span class="at">minsplit=</span><span class="dv">15</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Existe uma relação entre potência e outras variáveis como número de cilindros?</p>
+<p>Todos os carros têm uma potência média de 147 (mostrada no nó superior). Em seguida, os dados são divididos por cilindro. Carros com cilindragem &lt;7 (56% de todos os carros) têm uma potência média de 98 e carros com cilindragem &gt;=7 (44% de todos os carros) têm uma potência média de 209.</p>
+<p>As variáveis cilindragem (cyl) e consumo de combustível (mpg) podem explicar a potência. Os nós inferiores estão mostrando uma potência média de 80, 121 e 209.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>modelo_multi <span class="ot">=</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> cyl <span class="sc">+</span> disp <span class="sc">+</span> hp <span class="sc">+</span> drat <span class="sc">+</span> wt <span class="sc">+</span> qsec <span class="sc">+</span> vs <span class="sc">+</span> am <span class="sc">+</span> gear <span class="sc">+</span> carb, mtcars)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_multi)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = hp ~ cyl + mpg, data = mtcars)
+lm(formula = mpg ~ wt + cyl + disp + hp + drat + wt + qsec + 
+    vs + am + gear + carb, data = mtcars)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--53.72 -22.18 -10.13  14.47 130.73 
+    Min      1Q  Median      3Q     Max 
+-3.4506 -1.6044 -0.1196  1.2193  4.6271 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)   54.067     86.093   0.628  0.53492   
-cyl           23.979      7.346   3.264  0.00281 **
-mpg           -2.775      2.177  -1.275  0.21253   
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) 12.30337   18.71788   0.657   0.5181  
+wt          -3.71530    1.89441  -1.961   0.0633 .
+cyl         -0.11144    1.04502  -0.107   0.9161  
+disp         0.01334    0.01786   0.747   0.4635  
+hp          -0.02148    0.02177  -0.987   0.3350  
+drat         0.78711    1.63537   0.481   0.6353  
+qsec         0.82104    0.73084   1.123   0.2739  
+vs           0.31776    2.10451   0.151   0.8814  
+am           2.52023    2.05665   1.225   0.2340  
+gear         0.65541    1.49326   0.439   0.6652  
+carb        -0.19942    0.82875  -0.241   0.8122  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 38.22 on 29 degrees of freedom
-Multiple R-squared:  0.7093,    Adjusted R-squared:  0.6892 
-F-statistic: 35.37 on 2 and 29 DF,  p-value: 1.663e-08</code></pre>
+Residual standard error: 2.65 on 21 degrees of freedom
+Multiple R-squared:  0.869, Adjusted R-squared:  0.8066 
+F-statistic: 13.93 on 10 and 21 DF,  p-value: 3.793e-07</code></pre>
 </div>
 </div>
-<p>O modelo de regressão linear tenta prever a potência dos carros (hp) com base no número de cilindros (cyl) e no consumo de combustível (mpg) utilizando o conjunto de dados mtcars.</p>
-<p>Logo o número de cilindros (cyl) parece ser uma variável importante na predição da potência (hp) dos carros, enquanto o consumo de combustível (mpg) não parece ter uma influência significativa na potência após controlar para o número de cilindros.</p>
+<p>Conforme observado nas análises exploratórias acima descritas (gráfico de dispersão e matriz de correlação), há várias relações lineares entre as diferentes características físicas e desempenho do carro com a variável de eficiência, ou seja, mpg. Por conta disso, optei por construir um modelo de regressão utilizando a estratégia de “redução do modelo” onde são inseridas todas as variáveis preditoras candidatas ao modelo e, em seguida, são removidas sistematicamente as variáveis com o valor-p mais alto, um a um, até que você fique com apenas variáveis preditoras significativas.</p>
+<p>Após observado os valores de p do modelo em cima foi iniciada a estratégia de “redução do modelo”. Por fim, o modelo com apenas variáveis preditoras significantes foi o seguinte:</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores específicos de cyl e mpg para fazer previsões</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>novos_dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cyl =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>), <span class="at">mpg =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>previsoes <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo, <span class="at">newdata =</span> novos_dados)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(previsoes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>modelo_reduzido <span class="ot">=</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> qsec <span class="sc">+</span> am, mtcars)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_reduzido)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>        1         2 
- 80.61187 114.69528 </code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt + qsec + am, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4811 -1.5555 -0.7257  1.4110  4.6610 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   9.6178     6.9596   1.382 0.177915    
+wt           -3.9165     0.7112  -5.507 6.95e-06 ***
+qsec          1.2259     0.2887   4.247 0.000216 ***
+am            2.9358     1.4109   2.081 0.046716 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.459 on 28 degrees of freedom
+Multiple R-squared:  0.8497,    Adjusted R-squared:  0.8336 
+F-statistic: 52.75 on 3 and 28 DF,  p-value: 1.21e-11</code></pre>
 </div>
 </div>
-<p>Para um carro com 4 cilindros e 25 mpg, a previsão de potência (hp) é aproximadamente 80.61.</p>
-<p>Para um carro com 6 cilindros e 30 mpg, a previsão de potência (hp) é aproximadamente 114.70.</p>
-<p>Foi criado um novo conjunto de dados contendo os valores específicos de cyl e mpg para os quais você deseja fazer previsões. Aqui, estamos fazendo previsões para carros com 4 cilindros e 25 mpg, e carros com 6 cilindros e 30 mpg.</p>
+<p>Embora este modelo se resuma em apenas variáveis preditoras significantes, o que pode ser uma crítica, visto que outras variáveis podem ser importantes mesmo que elas náo apresentem relação significante, a inserção de muitas variáveis preditoras, em contrapartida, pode introduzir ao modelo ruídos aleatórios por conta de overfitting. Sendo assim, verificar indicadores de qualidade do modelo se torna fundamental.</p>
+</section>
+<section id="overfitting" class="level3">
+<h3 class="anchored" data-anchor-id="overfitting">Overfitting</h3>
+<p>O ajuste excessivo, ou overfitting, é um problema comum em aprendizado de máquina que ocorre quando um modelo é excessivamente complexo, contendo mais parâmetros do que o necessário para os dados disponíveis. Este modelo se ajusta muito bem aos dados de treinamento, incluindo ruídos e anomalias, mas falha em prever novos dados com precisão.</p>
+<section id="consequências" class="level4">
+<h4 class="anchored" data-anchor-id="consequências">Consequências</h4>
+<ul>
+<li>Modelos overfit tendem a ter bom desempenho nos dados de treino mas se comportam mal em dados de teste ou novos dados, o que pode levar a decisões equivocadas em situações reais.</li>
+</ul>
+</section>
+<section id="identificação" class="level4">
+<h4 class="anchored" data-anchor-id="identificação">Identificação</h4>
+<ul>
+<li>Overfitting pode ser identificado observando-se uma grande diferença entre os resultados nos dados de treino e teste, onde o modelo apresenta alta precisão nos dados de treino e baixa precisão nos dados de teste.</li>
+</ul>
+</section>
+<section id="estratégias-de-mitigação" class="level4">
+<h4 class="anchored" data-anchor-id="estratégias-de-mitigação">Estratégias de Mitigação</h4>
+<ul>
+<li><p><strong>Divisão de Dados</strong>: Dividir o conjunto de dados em treino e teste ajuda a detectar e evitar o overfitting, garantindo que o modelo seja avaliado em dados que não foram usados durante o treinamento.</p></li>
+<li><p><strong>Validação Cruzada</strong>: Utilizar técnicas de validação cruzada pode ajudar a avaliar a capacidade do modelo de generalizar para novos conjuntos de dados.</p></li>
+<li><p><strong>Seleção de Variáveis</strong>: Escolher variáveis com base em conhecimento substantivo e análise exploratória pode prevenir a inclusão de variáveis desnecessárias que aumentam a complexidade do modelo.</p></li>
+</ul>
+<p>Incluir estas práticas básicas no desenvolvimento de modelos ajuda a construir sistemas mais robustos e confiáveis.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando a média da variável dependente (hp) para cada grupo de carros com o mesmo número de cilindros</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>media_real <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(hp <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars, <span class="at">FUN =</span> mean)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibindo a média calculada</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(media_real)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">factor</span>(am))) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Peso (wt)"</span>, <span class="at">y =</span> <span class="st">"Eficiência de Combustível (mpg)"</span>, <span class="at">color =</span> <span class="st">"Transmissão"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Automático"</span>, <span class="st">"Manual"</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Relação entre Eficiência de Combustível, Peso e Transmissão"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> qsec, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">factor</span>(am))) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Tempo para percorrer um quarto de milha (qsec)"</span>, <span class="at">y =</span> <span class="st">"Eficiência de Combustível (mpg)"</span>, <span class="at">color =</span> <span class="st">"Transmissão"</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Automático"</span>, <span class="st">"Manual"</span>)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Relação entre Eficiência de Combustível, Tempo e Transmissão"</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Primeiramente, podemos observar que carros com transmissão automática apresentam maior peso e menor eficiência do que carros com transmissão manual. Além disso, nota-se que a variável am (transmissão) influência na inclinação da reta.</p>
+<p>Neste sentido foi ajustado o modelo proposto com uma interação entre as variáveis peso (wt) e transmissão (am) do automóvel. O novo modelo ficou da seguinte maneira:</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>novo_modelo <span class="ot">=</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> qsec <span class="sc">+</span> wt <span class="sc">*</span> am, mtcars)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(novo_modelo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>  cyl        hp
-1   4  82.63636
-2   6 122.28571
-3   8 209.21429</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ qsec + wt * am, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5076 -1.3801 -0.5588  1.0630  4.3684 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    9.723      5.899   1.648 0.110893    
+qsec           1.017      0.252   4.035 0.000403 ***
+wt            -2.937      0.666  -4.409 0.000149 ***
+am            14.079      3.435   4.099 0.000341 ***
+wt:am         -4.141      1.197  -3.460 0.001809 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.084 on 27 degrees of freedom
+Multiple R-squared:  0.8959,    Adjusted R-squared:  0.8804 
+F-statistic: 58.06 on 4 and 27 DF,  p-value: 7.168e-13</code></pre>
 </div>
 </div>
-<p>Referências:</p>
-<p>https://cran.r-project.org/web/packages/explore/vignettes/explore_mtcars.html</p>
-<p>http://leg.ufpr.br/~paulojus/ce223/ce223/ce223se8.html</p>
+<p>Como podemos observar, a inserção da interação entre as variáveis de peso e transmissão do automóvel promoveu um ajuste no modelo de regressão sendo que as variáveis preditores aumentaram o coeficiente e a probabilidade de acerto (todos p &lt; 0.01).</p>
+<p>Carros que levam mais tempo para percorrer um quarto de milha e têm transmissão automática tendem a ter uma eficiência de combustível mais alta, enquanto carros mais pesados tendem a ter uma eficiência de combustível mais baixa, e o efeito do peso no consumo de combustível pode ser diferente dependendo do tipo de transmissão.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>novo_dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">qsec =</span> <span class="dv">17</span>, <span class="at">wt =</span> <span class="fl">3.5</span>, <span class="at">am =</span> <span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>previsao_mpg <span class="ot">&lt;-</span> <span class="fu">predict</span>(novo_modelo, novo_dados)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(previsao_mpg)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+16.31836 </code></pre>
+</div>
+</div>
+<p>Foi criado um novo data frame com valores específicos para as variáveis independentes (qsec = 17, wt = 3.5, am = 1) e foi usado esses valores para fazer uma previsão de eficiência de combustível (mpg) usando um novo modelo. A previsão resultante foi de aproximadamente 16.32 mpg.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> <span class="fu">summary</span>(novo_modelo)<span class="sc">$</span>r.squared</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>r_squared</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8958514</code></pre>
+</div>
+</div>
+<p>Significa que cerca de 89.6% da variabilidade na eficiência de combustível (mpg) pode ser explicada pelas variáveis independentes incluídas no modelo.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>residuos <span class="ot">&lt;-</span> <span class="fu">residuals</span>(novo_modelo)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">predict</span>(novo_modelo), <span class="at">y =</span> residuos,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Valores Previstos"</span>, <span class="at">ylab =</span> <span class="st">"Resíduos"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gráfico de Resíduos versus Valores Previstos"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(residuos)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(residuos)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="gráfico-de-resíduos-versus-valores-previstos" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-resíduos-versus-valores-previstos">Gráfico de Resíduos versus Valores Previstos:</h3>
+<p>Neste gráfico, os resíduos (diferenças entre os valores observados e os valores previstos pelo modelo) são plotados no eixo vertical em relação aos valores previstos pelo modelo no eixo horizontal.</p>
+<p>Este gráfico é útil para verificar se os resíduos têm uma distribuição aleatória em torno de zero e se não há padrões discerníveis nos resíduos. Idealmente, gostaríamos de ver uma dispersão aleatória dos pontos em torno de zero, sem padrões visíveis.</p>
+<p>Se houver algum padrão ou tendência nos resíduos, isso pode indicar que o modelo não está capturando completamente a relação entre as variáveis ou que há heterocedasticidade.</p>
+</section>
+<section id="gráfico-q-q-plot" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-q-q-plot">Gráfico Q-Q Plot:</h3>
+<p>O gráfico Q-Q plot compara os quantis dos resíduos com os quantis de uma distribuição normal.</p>
+<p>Se os resíduos seguirem uma distribuição normal, os pontos no gráfico Q-Q plot seguirão aproximadamente uma linha reta.</p>
+<p>Qualquer desvio significativo dessa linha reta pode indicar desvios da normalidade nos resíduos.</p>
+<p>No gráfico de Resíduos versus Valores Previstos, os dados estão dispersos e não há um padrão discernível, o que é uma boa indicação.</p>
+<p>No gráfico Q-Q plot, os pontos estão próximos da linha reta, o que sugere que os resíduos estão aproximadamente normalmente distribuídos.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>outro_modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> mpg <span class="sc">~</span> qsec <span class="sc">+</span> wt, <span class="at">data =</span> mtcars)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>r_squared_outro <span class="ot">&lt;-</span> <span class="fu">summary</span>(outro_modelo)<span class="sc">$</span>r.squared</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>r_squared_outro</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8264161</code></pre>
+</div>
+</div>
+<p>Isso significa que este novo modelo explica cerca de 82.6% da variabilidade na eficiência de combustível com base nas variáveis qsec e wt. Comparado ao modelo anterior, que tinha um R ao quadrado de cerca de 0.896, este novo modelo explica um pouco menos da variabilidade nos dados.</p>
+</section>
+<section id="comparação-de-r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="comparação-de-r-squared">Comparação de R-squared :</h3>
+<p>O primeiro modelo (modelo original) tem um R-squared de aproximadamente 0.896.</p>
+<p>O segundo modelo (novo modelo) tem um R-squared de aproximadamente 0.826.</p>
+<p>Isso indica que o primeiro modelo explica mais da variabilidade na eficiência de combustível (mpg) com base nas variáveis incluídas no modelo.</p>
+</section>
+<section id="variáveis-incluídas" class="level3">
+<h3 class="anchored" data-anchor-id="variáveis-incluídas">Variáveis Incluídas:</h3>
+<p>O primeiro modelo inclui as variáveis qsec, wt e a interação wt:am.</p>
+<p>O segundo modelo inclui apenas as variáveis qsec e wt.</p>
+</section>
+<section id="interpretação" class="level3">
+<h3 class="anchored" data-anchor-id="interpretação">Interpretação:</h3>
+<p>O primeiro modelo pode ser mais complexo de interpretar devido à inclusão da interação entre wt e am. O segundo modelo é mais simples, incluindo apenas duas variáveis principais (qsec e wt).</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> qsec <span class="sc">+</span> am, <span class="at">data =</span> mtcars)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="residuals-vs-fitted" class="level3">
+<h3 class="anchored" data-anchor-id="residuals-vs-fitted">1. Residuals vs Fitted</h3>
+<p>Objetivo: Este gráfico mostra os resíduos em função dos valores ajustados (predições do modelo).</p>
+<p>Interpretação: Idealmente, você quer ver os pontos dispersos aleatoriamente em torno da linha horizontal em y = 0, sem padrões discerníveis. Isso indicaria que o modelo é apropriado e não há erros sistemáticos.</p>
+<p>Problemas Identificados: Padrões nos dados sugerem não-linearidade, resíduos crescentes ou decrescentes indicam heterocedasticidade (variância não constante dos resíduos).</p>
+</section>
+<section id="normal-q-q" class="level3">
+<h3 class="anchored" data-anchor-id="normal-q-q">2. Normal Q-Q</h3>
+<p>Objetivo: Este gráfico compara os quantis dos resíduos do modelo com os quantis de uma distribuição normal.</p>
+<p>Interpretação: Pontos alinhados aproximadamente em uma linha reta indicam que os resíduos estão distribuídos normalmente.</p>
+<p>Problemas Identificados: Desvios da linha reta sugerem que os resíduos não seguem uma distribuição normal.</p>
+</section>
+<section id="scale-location-também-conhecido-como-spread-location" class="level3">
+<h3 class="anchored" data-anchor-id="scale-location-também-conhecido-como-spread-location">3. Scale-Location (também conhecido como Spread-Location)</h3>
+<p>Objetivo: Este gráfico mostra os resíduos padronizados em relação aos valores ajustados, ajudando a verificar a homocedasticidade.</p>
+<p>Interpretação: Um spread constante dos resíduos ao longo dos valores ajustados sugere homocedasticidade.</p>
+<p>Problemas Identificados: Um funil (resíduos se espalhando ou contraindo com o aumento dos valores ajustados) indica heterocedasticidade.</p>
+</section>
+<section id="residuals-vs-leverage" class="level3">
+<h3 class="anchored" data-anchor-id="residuals-vs-leverage">4. Residuals vs Leverage</h3>
+<p>Objetivo: Este gráfico ajuda a identificar observações influentes.</p>
+<p>Interpretação: Observações fora da curva Cook’s distance sugerem pontos com alta influência.</p>
+<p>Problemas Identificados: Pontos com alta alavancagem e resíduos grandes são particularmente problemáticos, pois podem distorcer significativamente a regressão.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>previsoes <span class="ot">&lt;-</span> <span class="fu">predict</span>(novo_modelo, <span class="at">newdata =</span> mtcars)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>mpg, previsoes,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Valores Observados"</span>, <span class="at">ylab =</span> <span class="st">"Valores Previstos"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gráfico de Valores Observados x Valores Previstos"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="404_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Quando os valores observados aumentam, os valores previstos também aumentam, e vice-versa. Isso sugere que o modelo está capturando razoavelmente bem a tendência dos dados.</p>
+</section>
 
 </main>
 <!-- /main column -->
