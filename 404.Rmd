@@ -36,6 +36,9 @@ library(explore)
 library(dplyr, warn.conflicts = FALSE)
 library(caret)
 library(ggcorrplot)
+# library(knitr)
+# library(kableExtra)
+library(tidyr)
 ```
 
 ### INTRODUÇÃO
@@ -74,6 +77,84 @@ gear = Número de eixos dianteiros (do inglês Number of forward gears);
 
 carb = Número de carburadores (do inglês Number of carburetors).
 
+### Estátisticas Descritivas
+
+```{r}
+selected_vars <- mtcars[c("mpg", "wt", "hp", "cyl", "am")]
+
+descriptive_stats <- selected_vars %>%
+  summarise_all(list(
+    Mean = ~mean(.),
+    Median = ~median(.),
+    Mode = ~as.numeric(names(which.max(table(.)))),
+    SD = ~sd(.),
+    Variance = ~var(.),
+    Range = ~max(.) - min(.),
+    IQR = ~IQR(.)
+  ))
+# OBS:
+# summarise_all(): Essa função é usada para aplicar funções estatísticas a cada uma das colunas selecionadas.
+# ~mean(.) e outras funções: A til (~) seguida de uma função estatística indica que a função deve ser aplicada à coluna atual. O ponto (.) representa a coluna sendo processada.
+# Mode = ~as.numeric(names(which.max(table(.)))): O modo é calculado encontrando o valor mais frequente na coluna.
+```
+
+
+```{r}
+stats_long <- descriptive_stats %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "Statistic",
+    values_to = "Value"
+  ) %>%
+  separate(Statistic, into = c("Variable", "Statistic"), sep = "_") %>%
+  pivot_wider(
+    names_from = Statistic,
+    values_from = Value
+  )
+
+print(stats_long)
+
+# OBS:
+# pivot_longer(): Transforma o dataframe para o formato longo, onde cada linha representa uma estatística para uma variável.
+# separate(): Separa a coluna 'Statistic' em duas novas colunas, 'Variable' e 'Statistic', usando o sublinhado "" como separador. Isso assume que os nomes das estatísticas foram gerados com o nome da variável seguido por "" e o nome da estatística.
+# pivot_wider(): Transforma o dataframe de volta para o formato largo, onde cada linha representa uma variável e cada coluna uma estatística.
+```
+
+# Análise Estatística dos Dados do Dataset `mtcars`
+
+## Milhas por Galão (mpg)
+
+- **Média (Mean)**: 20.09 - Indica que em média, os carros percorrem 20.09 milhas por galão de combustível.
+- **Mediana (Median)**: 19.2 - Mais da metade dos carros consomem até 19.2 mpg, indicando uma distribuição relativamente centralizada em torno deste valor.
+- **Moda (Mode)**: 10.4 - O valor mais frequente de consumo é bastante baixo em comparação com a média, sugerindo a presença de outliers ou uma distribuição assimétrica.
+- **Desvio Padrão (SD)**: 6.03 - Uma variação significativa no consumo de combustível entre os carros.
+- **Variância (Variance)**: 36.32 - Reforça a observação do desvio padrão.
+- **Amplitude (Range)**: 23.5 - Uma grande variação no consumo de combustível, do mais eficiente ao menos eficiente.
+- **Intervalo Interquartil (IQR)**: 7.375 - A metade central dos dados tem uma variação menor, o que é típico de dados com outliers.
+
+## Peso (wt)
+
+- **Média**: 3.22 - O peso médio dos carros é de 3.22 x 1000 lbs.
+- **Moda**: 3.44 - O peso mais comum é de 3.44 x 1000 lbs.
+- **Desvio Padrão**: 0.98 - Mostra uma dispersão moderada no peso dos carros.
+
+## Potência (hp)
+
+- **Média**: 146.69 - Indica uma potência média elevada.
+- **Mediana**: 123 - A metade dos carros tem uma potência abaixo de 123 hp.
+- **Desvio Padrão**: 68.56 - Alta variação na potência dos carros, indicando uma diversidade significativa de modelos.
+- **Amplitude**: 283 - Variação extrema, do carro menos potente ao mais potente.
+
+## Número de Cilindros (cyl)
+
+- **Moda**: 8 - O número mais frequente de cilindros é 8, indicando uma prevalência de modelos mais potentes.
+- **Desvio Padrão**: 1.79 - Relativamente pouca variação no número de cilindros, sugerindo categorias bem definidas de carros.
+
+## Transmissão (am)
+
+- **Média**: 0.41 - A maioria dos carros possui transmissão automática (0).
+- **Moda**: 0 - Confirma que a maioria dos carros no dataset tem transmissão automática.
+- **Amplitude**: 1 - Indica a presença de ambos os tipos de transmissão, automática e manual.
 
 
 ```{r}
@@ -89,7 +170,12 @@ ggplot(mtcars, aes(x = factor(cyl))) +
 ```{r}
 hist(mtcars$hp)
 ```
+Podemos observar que este histograma esta um pouco distorcido a direita ( ou com cauda à direita).
+Isso nos indica que a maior parte da concentração dos dados está no início da distribuição.
 
+Analisando os dados então, temos uma rápida e fácil visualização da concentração dos hps de potência, que estão na sua maioria entre 100 e 150 hps.
+
+Mesmo com a cauda a direita, um fato interessante se confirma, que a media e mediana estão entre 100 e 150.
 
 
 ```{r}
