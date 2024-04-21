@@ -168,6 +168,16 @@ ggplot(mtcars, aes(x = factor(cyl))) +
 ```
 
 ```{r}
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +  
+  geom_boxplot() + 
+  labs(x = "Número de cilindros",                
+       y = "Consumo de combustível (mpg)",       
+       title = "Distribuição do consumo de combustível por número de cilindros") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+Apesar da maioria dos carros com 8 cilindros terem um consumo de combustível semelhante, há alguns casos extremos com um consumo muito alto ou muito baixo em relação à média. Esses pontos discrepantes podem indicar características incomuns nos veículos com 8 cilindros que os diferenciam dos demais.
+
+```{r}
 hist(mtcars$hp)
 ```
 Podemos observar que este histograma esta um pouco distorcido a direita ( ou com cauda à direita).
@@ -176,7 +186,6 @@ Isso nos indica que a maior parte da concentração dos dados está no início d
 Analisando os dados então, temos uma rápida e fácil visualização da concentração dos hps de potência, que estão na sua maioria entre 100 e 150 hps.
 
 Mesmo com a cauda a direita, um fato interessante se confirma, que a media e mediana estão entre 100 e 150.
-
 
 ```{r}
 mtcars %>% 
@@ -247,17 +256,6 @@ Existe uma relação entre potência e outras variáveis como número de cilindr
 Todos os carros têm uma potência média de 147 (mostrada no nó superior). Em seguida, os dados são divididos por cilindro. Carros com cilindragem <7 (56% de todos os carros) têm uma potência média de 98 e carros com cilindragem >=7 (44% de todos os carros) têm uma potência média de 209.
 
 As variáveis cilindragem (cyl) e consumo de combustível (mpg) podem explicar a potência. Os nós inferiores estão mostrando uma potência média de 80, 121 e 209.
-
-```{r}
-ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +  
-  geom_boxplot() + 
-  labs(x = "Número de cilindros",                
-       y = "Consumo de combustível (mpg)",       
-       title = "Distribuição do consumo de combustível por número de cilindros") +
-  theme(plot.title = element_text(hjust = 0.5))
-```
-Apesar da maioria dos carros com 8 cilindros terem um consumo de combustível semelhante, há alguns casos extremos com um consumo muito alto ou muito baixo em relação à média. Esses pontos discrepantes podem ser de interesse para uma análise mais aprofundada, pois podem indicar características incomuns nos veículos com 8 cilindros que os diferenciam dos demais.
-
 
 ```{r}
 modelo_multi = lm(mpg ~ wt + cyl + disp + hp + drat + wt + qsec + vs + am + gear + carb, mtcars)
