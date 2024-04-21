@@ -119,23 +119,6 @@ mtcars %>%
 Pode-se indentificar que a potência implica em um consumo maior de combustivel.
 
 ```{r}
-correl = cor(mtcars)
-
-# Em branco as correlações não significativas
-ggcorrplot(
-  correl,
-  hc.order = TRUE,
-  type = "lower",
-  lab = TRUE,
-  lab_size = 2.5,
-  p.mat = cor_pmat(mtcars), # martriz de p-valores para correlação
-  insig = "blank",
-  title = "Grafico matriz de Correlação"
-)
-```
-Ao analisar o gráfico podemos indentificar correlações positivas e negativas, os espaços em branco indicam uma fraca ou nenhuma correlação entre as variáveis, optei por não pôr no gráfico.
-
-```{r}
 ggplot(mtcars, aes(x = hp, y = mpg, color = factor(cyl))) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -150,6 +133,24 @@ Aqui nota-se que quanto maior o número de cilindros maior a potência e assim m
 Quem entende de veículos pode achar isso lógico, porém quero mostrar que essa relação pode ser entendida de forma mais simples e intuitiva visívelmente.
 
 Como essas poderiam ser construidos outros gráficos para mostrar as relações sobre a variavel dependente que nesse caso seria Milhas por Galão (mpg).
+
+```{r}
+correl = cor(mtcars)
+
+# Em branco as correlações não significativas
+ggcorrplot(
+  correl,
+  hc.order = TRUE,
+  type = "lower",
+  lab = TRUE,
+  lab_size = 2.5,
+  p.mat = cor_pmat(mtcars), # martriz de p-valores para correlação
+  insig = "blank",
+  title = "Grafico matriz de Correlação"
+)
+```
+
+Ao analisar o gráfico podemos indentificar correlações positivas e negativas, os espaços em branco indicam uma fraca ou nenhuma correlação entre as variáveis, optei por não pôr no gráfico.
 
 ```{r}
 mtcars %>% 
