@@ -80,7 +80,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Estudo da Base mtcars</h1>
-            <p class="subtitle lead"></p><p>Referências: - <a href="https://cran.r-project.org/web/packages/explore/vignettes/explore_mtcars.html">Explore mtcars</a> - <a href="http://leg.ufpr.br/~paulojus/ce223/ce223/ce223se8.html">CE223 - Modelos de Regressão Linear</a> - <a href="https://rpubs.com/Saulo_Gil/817833">Análise do dataset mtcars em R</a></p><p></p>
                       </div>
   </div>
     
@@ -653,37 +652,87 @@ F-statistic: 58.06 on 4 and 27 DF,  p-value: 7.168e-13</code></pre>
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> qsec <span class="sc">+</span> am, <span class="at">data =</span> mtcars)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># png("residuos.png", width = 800, height = 600)</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="404_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Analse de Variância (ANOVA)</p>
+<p>Podemos ver que o modelo contribui para esplicar a variabilidade de mpg.</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: mpg
+          Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+wt         1 847.73  847.73 140.2143 2.038e-12 ***
+qsec       1  82.86   82.86  13.7048 0.0009286 ***
+am         1  26.18   26.18   4.3298 0.0467155 *  
+Residuals 28 169.29    6.05                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
 </section>
-<section id="residuals-vs-fitted" class="level3">
-<h3 class="anchored" data-anchor-id="residuals-vs-fitted">1. Residuals vs Fitted</h3>
-<p>Objetivo: Este gráfico mostra os resíduos em função dos valores ajustados (predições do modelo).</p>
-<p>Interpretação: Idealmente, se quer ver os pontos dispersos aleatoriamente em torno da linha horizontal em y = 0, sem padrões discerníveis. Isso indicaria que o modelo é apropriado e não há erros sistemáticos.</p>
-<p>Problemas Identificados: Padrões nos dados sugerem não-linearidade, resíduos crescentes ou decrescentes indicam heterocedasticidade (variância não constante dos resíduos).</p>
+<section id="resíduos-vs.-valores-ajustados" class="level3">
+<h3 class="anchored" data-anchor-id="resíduos-vs.-valores-ajustados">1. Resíduos vs.&nbsp;Valores Ajustados</h3>
+<ul>
+<li><p><strong>Objetivo</strong>: Este gráfico mostra os resíduos em função dos valores ajustados (predições do modelo).</p></li>
+<li><p><strong>Interpretação</strong>: Idealmente, se quer ver os pontos dispersos aleatoriamente em torno da linha horizontal em y = 0, sem padrões discerníveis. Isso indicaria que o modelo é apropriado e não há erros sistemáticos.</p></li>
+<li><p><strong>Problemas Identificados</strong>: Padrões nos dados sugerem não-linearidade, resíduos crescentes ou decrescentes indicam heterocedasticidade (variância não constante dos resíduos).</p></li>
+<li><p><strong>Análises</strong>: O gráfico mostra algum padrão curvilíneo, sugerindo que pode haver não linearidade nos dados que o modelo linear não está capturando. Idealmente, queremos que os resíduos sejam aleatórios e sem padrão claro. A presença de um padrão sugere que o modelo pode precisar ser melhorado, talvez considerando transformações nas variáveis ou adicionando termos não lineares ao modelo.</p></li>
+</ul>
 </section>
-<section id="normal-q-q" class="level3">
-<h3 class="anchored" data-anchor-id="normal-q-q">2. Normal Q-Q</h3>
-<p>Objetivo: Este gráfico compara os quantis dos resíduos do modelo com os quantis de uma distribuição normal.</p>
-<p>Interpretação: Pontos alinhados aproximadamente em uma linha reta indicam que os resíduos estão distribuídos normalmente.</p>
-<p>Problemas Identificados: Desvios da linha reta sugerem que os resíduos não seguem uma distribuição normal.</p>
+<section id="q-q-de-resíduos" class="level3">
+<h3 class="anchored" data-anchor-id="q-q-de-resíduos">2. Q-Q de Resíduos</h3>
+<ul>
+<li><p><strong>Objetivo</strong>: Este gráfico compara os quantis dos resíduos do modelo com os quantis de uma distribuição normal.</p></li>
+<li><p><strong>Interpretação</strong>: Pontos alinhados aproximadamente em uma linha reta indicam que os resíduos estão distribuídos normalmente.</p></li>
+<li><p><strong>Problemas Identificados</strong>: Desvios da linha reta sugerem que os resíduos não seguem uma distribuição normal.</p></li>
+<li><p><strong>Análises</strong>: Os pontos parecem seguir razoavelmente bem a linha diagonal, o que sugere que a suposição de normalidade dos resíduos não é fortemente violada. No entanto, há alguns pontos nos extremos que se desviam da linha, o que pode indicar a presença de outliers ou que os resíduos têm caudas mais pesadas do que uma distribuição normal.</p></li>
+</ul>
 </section>
-<section id="scale-location-também-conhecido-como-spread-location" class="level3">
-<h3 class="anchored" data-anchor-id="scale-location-também-conhecido-como-spread-location">3. Scale-Location (também conhecido como Spread-Location)</h3>
-<p>Objetivo: Este gráfico mostra os resíduos padronizados em relação aos valores ajustados, ajudando a verificar a homocedasticidade.</p>
-<p>Interpretação: Um spread constante dos resíduos ao longo dos valores ajustados sugere homocedasticidade.</p>
-<p>Problemas Identificados: Um funil (resíduos se espalhando ou contraindo com o aumento dos valores ajustados) indica heterocedasticidade.</p>
+<section id="escala-localização" class="level3">
+<h3 class="anchored" data-anchor-id="escala-localização">3. Escala-Localização</h3>
+<ul>
+<li><p><strong>Objetivo</strong>: Este gráfico mostra os resíduos padronizados em relação aos valores ajustados, ajudando a verificar a homocedasticidade.</p></li>
+<li><p><strong>Interpretação</strong>: Um spread constante dos resíduos ao longo dos valores ajustados sugere homocedasticidade.</p></li>
+<li><p><strong>Problemas Identificados</strong>: Um funil (resíduos se espalhando ou contraindo com o aumento dos valores ajustados) indica heterocedasticidade.</p></li>
+<li><p><strong>Análises</strong>: Há um padrão crescente nos pontos deste gráfico, indicando que a variância dos resíduos pode aumentar com os valores ajustados (heterocedasticidade). Isso é uma violação da suposição de homocedasticidade, que afirma que os resíduos devem ter variação constante em todos os níveis dos valores ajustados.</p></li>
+</ul>
 </section>
-<section id="residuals-vs-leverage" class="level3">
-<h3 class="anchored" data-anchor-id="residuals-vs-leverage">4. Residuals vs Leverage</h3>
-<p>Objetivo: Este gráfico ajuda a identificar observações influentes.</p>
-<p>Interpretação: Observações fora da curva Cook’s distance sugerem pontos com alta influência.</p>
-<p>Problemas Identificados: Pontos com alta alavancagem e resíduos grandes são particularmente problemáticos, pois podem distorcer significativamente a regressão.</p>
+<section id="resíduos-vs.-alavancagem" class="level3">
+<h3 class="anchored" data-anchor-id="resíduos-vs.-alavancagem">4. Resíduos vs.&nbsp;Alavancagem:</h3>
+<ul>
+<li><p><strong>Objetivo</strong>: Este gráfico ajuda a identificar observações influentes.</p></li>
+<li><p><strong>Interpretação</strong>: Observações fora da curva Cook’s distance sugerem pontos com alta influência.</p></li>
+<li><p><strong>Problemas Identificados</strong>: Pontos com alta alavancagem e resíduos grandes são particularmente problemáticos, pois podem distorcer significativamente a regressão.</p></li>
+<li><p><strong>Análises</strong>: A maioria dos pontos está dentro dos limites sugeridos pela distância de Cook, mas há alguns pontos com uma alavancagem mais alta e possivelmente influentes. Isso significa que alguns pontos podem estar tendo um efeito desproporcional na análise e podem precisar de uma investigação mais aprofundada.</p></li>
+</ul>
+</section>
+<section id="conclusão" class="level3">
+<h3 class="anchored" data-anchor-id="conclusão">Conclusão</h3>
+<p>Com base nestes gráficos, pude concluir que, embora o modelo de regressão possa ser razoável, há sinais de que ele não é perfeito. Pode ser necessário investigar mais os pontos que são outliers ou influentes, considerar transformações de dados, adicionar termos não lineares, ou até usar um modelo de regressão diferente para obter um ajuste melhor.</p>
+<section id="referências-usadas-para-este-estudo" class="level4">
+<h4 class="anchored" data-anchor-id="referências-usadas-para-este-estudo">Referências usadas para este Estudo</h4>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/explore/vignettes/explore_mtcars.html">Explore mtcars</a><br>
+</li>
+<li><a href="http://leg.ufpr.br/~paulojus/ce223/ce223/ce223se8.html">CE223 - Modelos de Regressão Linear</a><br>
+</li>
+<li><a href="https://rpubs.com/Saulo_Gil/817833">Análise do dataset mtcars em R</a></li>
+<li><a href="https://www.youtube.com/@Statplace">Statplace</a></li>
+<li><a href="https://www.youtube.com/@FernandaPeres">Fernanda Peres</a></li>
+</ul>
+</section>
 </section>
 </section>
 </section>

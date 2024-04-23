@@ -1,15 +1,8 @@
 ---
 title: "Estudo da Base mtcars" # -----> Título
-subtitle: "
-Referências:
-
-- [Explore mtcars](https://cran.r-project.org/web/packages/explore/vignettes/explore_mtcars.html)  
-- [CE223 - Modelos de Regressão Linear](http://leg.ufpr.br/~paulojus/ce223/ce223/ce223se8.html)  
-- [Análise do dataset mtcars em R](https://rpubs.com/Saulo_Gil/817833)
-
-" # -----> Subtítulo
+subtitle: "" # -----> Subtítulo
 author: "Maurício Rodrigues" # -----> Autoria
-date: "2024-04-17" # -----> Data de publicação
+date: "2024-04-23" # -----> Data de publicação
 date-format: short # -----> Formato de data curto: dd/mm/aaaa
 lang: pt # -----> Linguagem: português
 format: 
@@ -36,8 +29,7 @@ library(explore)
 library(dplyr, warn.conflicts = FALSE)
 library(caret)
 library(ggcorrplot)
-# library(knitr)
-# library(kableExtra)
+library(stats)
 library(tidyr)
 ```
 
@@ -426,38 +418,69 @@ O segundo modelo é mais simples, incluindo apenas duas variáveis principais (q
 ```{r}
 modelo <- lm(mpg ~ wt + qsec + am, data = mtcars)
 
+# png("residuos.png", width = 800, height = 600)
+
 par(mfrow=c(2,2))
 plot(modelo)
+
 ```
-### 1. Residuals vs Fitted
+Analse de Variância (ANOVA)
 
-Objetivo: Este gráfico mostra os resíduos em função dos valores ajustados (predições do modelo).
+Podemos ver que o modelo contribui para esplicar a variabilidade de mpg.
+```{r}
+anova(modelo)
+```
+### 1. Resíduos vs. Valores Ajustados
 
-Interpretação: Idealmente, se quer ver os pontos dispersos aleatoriamente em torno da linha horizontal em y = 0, sem padrões discerníveis. Isso indicaria que o modelo é apropriado e não há erros sistemáticos.
+- **Objetivo**: Este gráfico mostra os resíduos em função dos valores ajustados (predições do modelo).
 
-Problemas Identificados: Padrões nos dados sugerem não-linearidade, resíduos crescentes ou decrescentes indicam heterocedasticidade (variância não constante dos resíduos).
+- **Interpretação**: Idealmente, se quer ver os pontos dispersos aleatoriamente em torno da linha horizontal em y = 0, sem padrões discerníveis. Isso indicaria que o modelo é apropriado e não há erros sistemáticos.
 
-### 2. Normal Q-Q
+- **Problemas Identificados**: Padrões nos dados sugerem não-linearidade, resíduos crescentes ou decrescentes indicam heterocedasticidade (variância não constante dos resíduos).
 
-Objetivo: Este gráfico compara os quantis dos resíduos do modelo com os quantis de uma distribuição normal.
+- **Análises**: O gráfico mostra algum padrão curvilíneo, sugerindo que pode haver não linearidade nos dados que o modelo linear não está capturando. Idealmente, queremos que os resíduos sejam aleatórios e sem padrão claro. A presença de um padrão sugere que o modelo pode precisar ser melhorado, talvez considerando transformações nas variáveis ou adicionando termos não lineares ao modelo.
 
-Interpretação: Pontos alinhados aproximadamente em uma linha reta indicam que os resíduos estão distribuídos normalmente.
+### 2. Q-Q de Resíduos
 
-Problemas Identificados: Desvios da linha reta sugerem que os resíduos não seguem uma distribuição normal.
+- **Objetivo**: Este gráfico compara os quantis dos resíduos do modelo com os quantis de uma distribuição normal.
 
-### 3. Scale-Location (também conhecido como Spread-Location)
+- **Interpretação**: Pontos alinhados aproximadamente em uma linha reta indicam que os resíduos estão distribuídos normalmente.
 
-Objetivo: Este gráfico mostra os resíduos padronizados em relação aos valores ajustados, ajudando a verificar a homocedasticidade.
+- **Problemas Identificados**: Desvios da linha reta sugerem que os resíduos não seguem uma distribuição normal.
 
-Interpretação: Um spread constante dos resíduos ao longo dos valores ajustados sugere homocedasticidade.
+- **Análises**: Os pontos parecem seguir razoavelmente bem a linha diagonal, o que sugere que a suposição de normalidade dos resíduos não é fortemente violada. No entanto, há alguns pontos nos extremos que se desviam da linha, o que pode indicar a presença de outliers ou que os resíduos têm caudas mais pesadas do que uma distribuição normal.
 
-Problemas Identificados: Um funil (resíduos se espalhando ou contraindo com o aumento dos valores ajustados) indica heterocedasticidade.
+### 3. Escala-Localização
 
-### 4. Residuals vs Leverage
+- **Objetivo**: Este gráfico mostra os resíduos padronizados em relação aos valores ajustados, ajudando a verificar a homocedasticidade.
 
-Objetivo: Este gráfico ajuda a identificar observações influentes.
+- **Interpretação**: Um spread constante dos resíduos ao longo dos valores ajustados sugere homocedasticidade.
 
-Interpretação: Observações fora da curva Cook’s distance sugerem pontos com alta influência.
+- **Problemas Identificados**: Um funil (resíduos se espalhando ou contraindo com o aumento dos valores ajustados) indica heterocedasticidade.
 
-Problemas Identificados: Pontos com alta alavancagem e resíduos grandes são particularmente problemáticos, pois podem distorcer significativamente a regressão.
+- **Análises**: Há um padrão crescente nos pontos deste gráfico, indicando que a variância dos resíduos pode aumentar com os valores ajustados (heterocedasticidade). Isso é uma violação da suposição de homocedasticidade, que afirma que os resíduos devem ter variação constante em todos os níveis dos valores ajustados.
 
+### 4. Resíduos vs. Alavancagem:
+
+- **Objetivo**: Este gráfico ajuda a identificar observações influentes.
+
+- **Interpretação**: Observações fora da curva Cook’s distance sugerem pontos com alta influência.
+
+- **Problemas Identificados**: Pontos com alta alavancagem e resíduos grandes são particularmente problemáticos, pois podem distorcer significativamente a regressão.
+
+- **Análises**: A maioria dos pontos está dentro dos limites sugeridos pela distância de Cook, mas há alguns pontos com uma alavancagem mais alta e possivelmente influentes. Isso significa que alguns pontos podem estar tendo um efeito desproporcional na análise e podem precisar de uma investigação mais aprofundada.
+
+
+### Conclusão
+
+Com base nestes gráficos, pude concluir que, embora o modelo de regressão possa ser razoável, há sinais de que ele não é perfeito. Pode ser necessário investigar mais os pontos que são outliers ou influentes, considerar transformações de dados, adicionar termos não lineares, ou até usar um modelo de regressão diferente para obter um ajuste melhor.
+
+
+
+#### Referências usadas para este Estudo
+
+- [Explore mtcars](https://cran.r-project.org/web/packages/explore/vignettes/explore_mtcars.html)  
+- [CE223 - Modelos de Regressão Linear](http://leg.ufpr.br/~paulojus/ce223/ce223/ce223se8.html)  
+- [Análise do dataset mtcars em R](https://rpubs.com/Saulo_Gil/817833)
+- [Statplace](https://www.youtube.com/@Statplace)
+- [Fernanda Peres](https://www.youtube.com/@FernandaPeres)
