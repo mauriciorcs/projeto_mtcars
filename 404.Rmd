@@ -2,7 +2,7 @@
 title: "Estudo da Base mtcars" # -----> Título
 subtitle: "" # -----> Subtítulo
 author: "Maurício Rodrigues" # -----> Autoria
-date: "2024-04-23" # -----> Data de publicação
+date: "2024-04-17" # -----> Data de publicação
 date-format: short # -----> Formato de data curto: dd/mm/aaaa
 lang: pt # -----> Linguagem: português
 format: 
@@ -69,6 +69,9 @@ gear = Número de eixos dianteiros (do inglês Number of forward gears);
 
 carb = Número de carburadores (do inglês Number of carburetors).
 
+
+# Análise Estatística dos Dados do Dataset `mtcars`
+
 ### Estátisticas Descritivas
 
 ```{r}
@@ -111,8 +114,6 @@ print(stats_long)
 # separate(): Separa a coluna 'Statistic' em duas novas colunas, 'Variable' e 'Statistic', usando o sublinhado "" como separador. Isso assume que os nomes das estatísticas foram gerados com o nome da variável seguido por "" e o nome da estatística.
 # pivot_wider(): Transforma o dataframe de volta para o formato largo, onde cada linha representa uma variável e cada coluna uma estatística.
 ```
-
-# Análise Estatística dos Dados do Dataset `mtcars`
 
 ## Milhas por Galão (mpg)
 
